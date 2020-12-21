@@ -33,7 +33,7 @@
 
   <div class="form-group">
     <%= form.label :currency %>
-    <select name="product[currency]" class= "form-control">
+    <select name="product[currency]" class= "form-control" id = "form-group">
       <option value="NTD">NTD</option>
       <option value="USD">USD</option>
       <option value="HKD">HKD</option>
@@ -42,13 +42,87 @@
 
   <div class="form-group">
     <%= form.label :tag_list %>
-    <select name="product[tag_list][]" multiple= 'true' class= "form-control">
-      <option value="tag1">tag1</option>
-      <option value="tag2">tag2</option>
-      <option value="tag3">tag3</option>
-    </select>
+    <select name="form-control" multiple= 'true' class= "form-control" id = 'form-tag'>
+    <option selected="selected">orange</option>
+    <option>white</option>
+    <option>purple</option>
+  </select>
   </div>
   <div class="actions">
-    <%= form.submit 'submit', class: 'btn btn-primary' %>
+    <%= form.submit 'submit', class: 'btn btn-primary', id: 'btn-submit' %>
   </div>
 <% end %>
+
+<div class="container">
+    <div class='col-md-5'>
+        <div class="form-group">
+           <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
+                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker7"/>
+                <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class='col-md-5'>
+        <div class="form-group">
+           <div class="input-group date" id="datetimepicker8" data-target-input="nearest">
+                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker8"/>
+                <div class="input-group-append" data-target="#datetimepicker8" data-toggle="datetimepicker">
+                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+$("#form-group").change(function (){
+  $(this).find('option').css('background-color', '#DC9FB4')
+})
+
+
+$("#form-tag").select2({
+    tags: true,
+    tokenSeparators: [',', ' ']
+})
+
+document.getElementById("btn-submit").addEventListener("click", function() {
+  event.preventDefault();
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You will create the product!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes, create it!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        'create!',
+        'Your product has been created.',
+        'success'
+      )
+      document.forms[0].submit()
+    }
+  })
+});
+
+$(function () {
+  $('#datetimepicker7').datetimepicker();
+  $('#datetimepicker8').datetimepicker({
+      useCurrent: false
+  });
+  $("#datetimepicker7").on("change.datetimepicker", function (e) {
+      $('#datetimepicker8').datetimepicker('minDate', e.date);
+  });
+  $("#datetimepicker8").on("change.datetimepicker", function (e) {
+      $('#datetimepicker7').datetimepicker('maxDate', e.date);
+  });
+});
+
+
+</script>

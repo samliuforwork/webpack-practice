@@ -17,3 +17,14 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.css'
+import 'select2'
+import 'select2/dist/css/select2.css'
+import 'jquery'
+import $ from 'jquery'
+window.jQuery = $
+window.$ = $
+import 'sweetalert2'
+import 'sweetalert2/dist/sweetalert2.all'
+import 'sweetalert2/dist/sweetalert2.css'
+import Swal from 'sweetalert2'
+window.Swal = Swal
